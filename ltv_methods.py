@@ -1,3 +1,7 @@
+#
+import pandas as pd
+import numpy as np
+
 # Function for LTV_1 predict
 def predict_ltv_1(agg_data):
   ARPU = agg_data['Revenue_month']/agg_data['MAU_month'].mean()
