@@ -10,7 +10,7 @@ def predict_ltv_1(agg_data):
   #print('ARPU Mean:     ', ARPU_mean)
   #print('Lifetime Mean: ', Lifetime_mean)
   LTV_1 = ARPU_mean * Lifetime_mean
-  return print('LTV_1: ', round(LTV_1, 2))
+  return print('LTV_1 with max of mean ARPU*Lifetime: ', round(LTV_1, 2))
 
 
 # Function for LTV_2 predict
@@ -27,7 +27,7 @@ def predict_ltv_2(agg_data):
     DAYS = [1, 7, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360,
             390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720]
 
-    DF = pd.DataFrame(DAYS)
+    DF = pd.DataFrame(DAYS).copy()
     DF.columns = ['DAYS']
     DF['RETENTION'] = 0
     DF['RETENTION'].iloc[:3] = RETENTION
@@ -55,7 +55,7 @@ def predict_ltv_3(agg_data):
             390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720]
 
     DF = pd.DataFrame(DAYS)
-    DF.columns = ['DAYS']
+    DF.columns = ['DAYS'].copy()
     DF['CARPU'] = 0
     DF['CARPU'].iloc[:4] = CARPU
     DF['CARPU'].iloc[4:] = DF['DAYS'].iloc[3:].apply(lambda x: comulative_ARPU_func(x))
