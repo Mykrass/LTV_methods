@@ -35,7 +35,7 @@ def predict_ltv_2(agg_data):
     return print('LTV_2 with integral of Retention: ', round(LTV_2, 2))
 
 
-# Function for LTV_2 predict
+# Function for LTV_3 predict
 def predict_ltv_3(agg_data):
     # Retention function
     def comulative_ARPU_func(days):
