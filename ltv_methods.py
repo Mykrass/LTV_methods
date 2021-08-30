@@ -1,3 +1,7 @@
+#
+import pandas as pd
+import numpy as np
+
 # Function for LTV_1 predict
 def predict_ltv_1(agg_data):
   ARPU = agg_data['Revenue_month']/agg_data['MAU_month'].mean()
@@ -6,7 +10,7 @@ def predict_ltv_1(agg_data):
   #print('ARPU Mean:     ', ARPU_mean)
   #print('Lifetime Mean: ', Lifetime_mean)
   LTV_1 = ARPU_mean * Lifetime_mean
-  return print('LTV_1: ', round(LTV_1, 2))
+  return print('LTV_1 with max of mean ARPU*Lifetime: ', round(LTV_1, 2))
 
 
 # Function for LTV_2 predict
@@ -26,7 +30,7 @@ def predict_ltv_2(agg_data):
     DF = pd.DataFrame(DAYS)
     DF.columns = ['DAYS']
     DF['RETENTION'] = 0
-    DF['RETENTION'].iloc[:3] = RETENTION
+    DF['RETENTION'].iloc[:3] = RETENTION.copy()
     DF['RETENTION'].iloc[3:] = DF['DAYS'].iloc[3:].apply(lambda x: retention_func(x))
 
     # DF.plot(x="DAYS", y="RETENTION", alpha=0.5)
@@ -35,7 +39,7 @@ def predict_ltv_2(agg_data):
     return print('LTV_2 with integral of Retention: ', round(LTV_2, 2))
 
 
-# Function for LTV_2 predict
+# Function for LTV_3 predict
 def predict_ltv_3(agg_data):
     # Retention function
     def comulative_ARPU_func(days):
@@ -53,7 +57,7 @@ def predict_ltv_3(agg_data):
     DF = pd.DataFrame(DAYS)
     DF.columns = ['DAYS']
     DF['CARPU'] = 0
-    DF['CARPU'].iloc[:4] = CARPU
+    DF['CARPU'].iloc[:4] = CARPU.copy()
     DF['CARPU'].iloc[4:] = DF['DAYS'].iloc[3:].apply(lambda x: comulative_ARPU_func(x))
 
     # DF.plot(x="DAYS", y="RETENTION", alpha=0.5)
